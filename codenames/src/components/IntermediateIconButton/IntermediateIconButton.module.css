@@ -1,0 +1,52 @@
+.container {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0 1%;
+  border-radius: 100px;
+  background-color: #ffe400;
+  border-top: 2px solid #fff6a5;
+  border-bottom: 2px solid #f3ff00;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0.2rem 0.2rem 1px 0px;
+          box-shadow: rgba(0, 0, 0, 0.5) 0.2rem 0.2rem 1px 0px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+  height: 2em;
+}
+
+.container:hover {
+  cursor: pointer;
+}
+
+.container img {
+  height: 1em;
+  width: 0.8em;
+}
+
+.container div {
+  padding: 0 2px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container div p {
+  margin: 0;
+}
+/*# sourceMappingURL=IntermediateIconButton.module.css.map */

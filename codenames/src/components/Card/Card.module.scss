@@ -1,0 +1,55 @@
+$Lato: 'Lato', sans-serif;
+$cardWidth: 9vw;
+$cardHeight: 0.645 * $cardWidth;
+
+// $cardHeight: 13.11vh;
+// $cardWidth: 1.55*$cardHeight;
+
+.card {
+    background-image: url('../../assets/card-gray.png');
+    background-size: contain;
+    width: $cardWidth;
+    height: $cardHeight;
+    display: flex;
+    justify-content: center;
+
+    .cardText {
+        position: relative;
+        top: $cardHeight * 0.58;
+        height: $cardHeight * 0.28;
+        width: $cardWidth * 0.8;
+        text-align: center;
+    }
+
+    p {
+        font-family: $Lato;
+        font-size: $cardWidth * 0.17;
+        margin: 0;
+    }
+}
+
+.redCard {
+    background-image: url('../../assets/card-red.png');
+}
+
+.blueCard {
+    background-image: url('../../assets/card-blue.png');
+}
+
+.blackCard {
+    background-image: url('../../assets/card-black.png');
+    p {
+        color: white;
+    }
+}
+
+.hover {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+img {
+    width: $cardWidth;
+    height: $cardHeight;
+}

@@ -1,0 +1,52 @@
+.card {
+  background-image: url("../../assets/card-gray.png");
+  background-size: contain;
+  width: 9vw;
+  height: 5.805vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.card .cardText {
+  position: relative;
+  top: 3.3669vw;
+  height: 1.6254vw;
+  width: 7.2vw;
+  text-align: center;
+}
+
+.card p {
+  font-family: "Lato", sans-serif;
+  font-size: 1.53vw;
+  margin: 0;
+}
+
+.redCard {
+  background-image: url("../../assets/card-red.png");
+}
+
+.blueCard {
+  background-image: url("../../assets/card-blue.png");
+}
+
+.blackCard {
+  background-image: url("../../assets/card-black.png");
+}
+
+.blackCard p {
+  color: white;
+}
+
+.hover:hover {
+  cursor: pointer;
+}
+
+img {
+  width: 9vw;
+  height: 5.805vw;
+}
+/*# sourceMappingURL=Card.module.css.map */
