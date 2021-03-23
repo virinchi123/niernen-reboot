@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.7);
+    height: 40vh;
+    border-radius: 3em;
+    padding-bottom: 1em;
+    box-sizing: border-box;
+    padding-top: 0;
+    width: 30vw;
+    font-size: 0.5em;
+    justify-content: space-between;
+
+    .header {
+        display: flex;
+        justify-content: center;
+    }
+
+    .logs {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+}

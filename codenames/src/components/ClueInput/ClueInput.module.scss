@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    justify-content: space-evenly;
+
+    input {
+        border: none;
+        box-shadow: 0 2px #eee;
+        border-radius: 1em;
+        padding: 10px;
+        text-align: center;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    select {
+        border: none;
+        box-shadow: 0 2px #eee;
+        border-radius: 1em;
+        padding-left: 1em;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

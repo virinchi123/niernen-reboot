@@ -1,6 +1,13 @@
 .message {
-  margin: 0.1em;
+  margin: 0.1em 0;
   font-family: 'Lato', sans-serif;
+  padding: 0.1em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.message p {
+  margin: 0;
 }
 
 .red {
