@@ -1,0 +1,25 @@
+.message {
+  margin: 0.1em;
+  font-family: 'Lato', sans-serif;
+}
+
+.red {
+  background-color: #ffe7d5;
+}
+
+.red span {
+  color: #c02005;
+}
+
+.red span:nth-of-type(2) {
+  text-transform: uppercase;
+}
+
+.blue {
+  background-color: #cff9ff;
+}
+
+.blue span {
+  color: #0079c9;
+}
+/*# sourceMappingURL=LogMessage.module.css.map */

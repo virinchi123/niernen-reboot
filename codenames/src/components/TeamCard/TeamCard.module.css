@@ -1,0 +1,70 @@
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1vh 0.5vw;
+  padding-bottom: 0.7em;
+  -webkit-box-shadow: 0px 0.5em black;
+          box-shadow: 0px 0.5em black;
+  border-radius: 1em;
+  max-width: 17vw;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container .inverted {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  padding-right: 0;
+  padding-left: 1vw;
+}
+
+.container .teamBanner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .teamBanner h2 {
+  color: white;
+  font-family: 'Fredoka One', cursive;
+  font-size: 3vw;
+  text-shadow: black 0px 0px 0.5em;
+}
+
+.container .teamBanner img {
+  max-height: 20vh;
+  width: auto;
+  margin-bottom: 1vh;
+}
+
+.redContainer {
+  background-color: #8f2b1c;
+  -webkit-box-shadow: 0px 2px #641e14;
+          box-shadow: 0px 2px #641e14;
+  border: 1px solid #641e14;
+}
+
+.redContainer .teamBanner {
+  padding-right: 2vw;
+}
+
+.blueContainer {
+  background-color: #3284a3;
+  -webkit-box-shadow: 0px 2px #26647c;
+          box-shadow: 0px 2px #26647c;
+  border: 1px solid #26647c;
+}
+/*# sourceMappingURL=TeamCard.module.css.map */

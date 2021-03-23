@@ -1,0 +1,36 @@
+$colors: (
+    teamRed: rgb(197, 89, 73),
+    teamBlue: rgb(111, 183, 209),
+);
+
+@function color($color) {
+    @return map-get($map: $colors, $key: $color);
+}
+
+.container {
+    h3 {
+        font-family: 'Lato', sans-serif;
+        font-size: 0.5em;
+        margin: 0;
+    }
+
+    h4 {
+        font-family: 'Fredoka One', cursive;
+        color: white;
+        font-size: 0.4em;
+        margin: 0;
+        margin-left: 1em;
+    }
+}
+
+.redTeam {
+    h3 {
+        color: color(teamRed);
+    }
+}
+
+.blueTeam {
+    h3 {
+        color: color(teamBlue);
+    }
+}

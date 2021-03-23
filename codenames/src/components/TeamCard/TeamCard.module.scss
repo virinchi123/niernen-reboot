@@ -1,0 +1,67 @@
+$colors: (
+    buttonYellow: rgb(255, 228, 0),
+    borderYellowBottom: rgb(243, 287, 0),
+    borderYellowTop: rgb(255, 246, 165),
+    buttonOrange: rgb(255, 136, 30),
+    lightRed: rgb(230, 88, 49),
+    darkRed: rgb(117, 35, 23),
+    lightBlue: rgb(123, 202, 233),
+    teamRed: rgb(143, 43, 28),
+    teamBlue: rgb(50, 132, 163),
+);
+
+@function color($color) {
+    @return map-get($map: $colors, $key: $color);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 1vh 0.5vw;
+    padding-bottom: 0.7em;
+    box-shadow: 0px 0.5em darken(color(teamRed), 40%);
+    border-radius: 1em;
+    max-width: 17vw;
+    box-sizing: border-box;
+
+    .inverted {
+        flex-direction: row-reverse;
+        padding-right: 0;
+        padding-left: 1vw;
+    }
+
+    .teamBanner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+            color: white;
+            font-family: 'Fredoka One', cursive;
+            font-size: 3vw;
+            text-shadow: rgba(0, 0, 0, 1) 0px 0px 0.5em;
+        }
+
+        img {
+            max-height: 20vh;
+            width: auto;
+            margin-bottom: 1vh;
+        }
+    }
+}
+
+.redContainer {
+    background-color: color(teamRed);
+    box-shadow: 0px 2px darken(color(teamRed), 10%);
+    border: 1px solid darken(color(teamRed), 10%);
+
+    .teamBanner {
+        padding-right: 2vw;
+    }
+}
+
+.blueContainer {
+    background-color: color(teamBlue);
+    box-shadow: 0px 2px darken(color(teamBlue), 10%);
+    border: 1px solid darken(color(teamBlue), 10%);
+}

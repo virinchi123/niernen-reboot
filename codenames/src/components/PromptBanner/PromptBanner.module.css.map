@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,gBAAgB,EAAE,KAAK;EACvB,OAAO,EAAE,GAAG;EACZ,WAAW,EAAE,kBAAkB;EAC/B,aAAa,EAAE,GAAG;EAClB,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,MAAM;CAK1B;;AAXD,AAQI,UARM,CAQN,EAAE,CAAC;EACC,SAAS,EAAE,GAAG;CACjB",
+    "sources": [
+        "PromptBanner.module.scss"
+    ],
+    "names": [],
+    "file": "PromptBanner.module.css"
+}
