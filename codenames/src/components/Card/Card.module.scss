@@ -1,4 +1,4 @@
-$Lato: 'Lato', sans-serif;
+$Jost: 'Jost', sans-serif;
 $cardWidth: 9vw;
 $cardHeight: 0.645 * $cardWidth;
 
@@ -15,14 +15,15 @@ $cardHeight: 0.645 * $cardWidth;
 
     .cardText {
         position: relative;
-        top: $cardHeight * 0.58;
+        top: $cardHeight * 0.52;
         height: $cardHeight * 0.28;
         width: $cardWidth * 0.8;
         text-align: center;
     }
 
     p {
-        font-family: $Lato;
+        font-family: $Jost;
+        font-weight: 600;
         font-size: $cardWidth * 0.17;
         margin: 0;
     }

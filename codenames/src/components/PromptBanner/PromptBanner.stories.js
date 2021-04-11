@@ -15,4 +15,5 @@ const Template = args => <PromptBanner {...args} />;
 export const Default = Template.bind({});
 Default.args = {
     text: 'Banner',
+    show: true,
 };

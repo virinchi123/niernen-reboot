@@ -1,12 +1,14 @@
 .container {
     background-color: white;
     padding: 3px;
-    font-family: 'Lato', sans-serif;
-    border-radius: 1em;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 0.32em;
     display: flex;
     justify-content: center;
 
     h2 {
-        font-size: 1em;
+        font-size: 1.05em;
+        margin: 0;
+        font-weight: 900;
     }
 }

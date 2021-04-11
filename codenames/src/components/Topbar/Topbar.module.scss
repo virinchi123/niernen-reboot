@@ -20,11 +20,14 @@ $colors: (
     //grid-area: topbar;
     box-sizing: border-box;
     padding: 1%;
+    padding-top: 0.4%;
+    padding-left: 0;
+    padding-right: 0;
 
     .rightTop {
         display: flex;
         align-items: flex-start;
-        justify-content: space-evenly;
+        justify-content: flex-end;
         width: 32.7vw;
 
         img {

@@ -18,14 +18,15 @@ $colors: (
     align-items: center;
     justify-content: center;
     padding: 0 1%;
-    border-radius: 100px;
+    border-radius: 10px;
     background-color: color(buttonYellow);
     border-top: 2px solid color(borderYellowTop);
     border-bottom: 2px solid color(borderYellowBottom);
-    box-shadow: rgba(0, 0, 0, 0.5) 0.2rem 0.2rem 1px 0px;
+    box-shadow: lighten(rgba(0, 0, 0, 0.5), 10%) 0rem 0.15rem 1px 0px;
     box-sizing: border-box;
-    font-family: 'Lato', sans-serif;
-
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75em;
+    margin: 0px 4px;
     height: 2em;
 
     &:hover {
@@ -44,6 +45,8 @@ $colors: (
 
         p {
             margin: 0;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
         }
     }
 }

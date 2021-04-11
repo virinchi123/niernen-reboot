@@ -1,12 +1,14 @@
 .container {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 
     input {
         border: none;
         box-shadow: 0 2px #eee;
         border-radius: 1em;
-        padding: 10px;
+        padding: 5px;
+        box-sizing: border-box;
         text-align: center;
 
         &:focus {
@@ -19,6 +21,7 @@
         box-shadow: 0 2px #eee;
         border-radius: 1em;
         padding-left: 1em;
+        height: 2em;
 
         &:focus {
             outline: none;

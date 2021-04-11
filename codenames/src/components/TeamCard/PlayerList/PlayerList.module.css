@@ -1,15 +1,16 @@
 .container h3 {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.5em;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.75em;
   margin: 0;
 }
 
 .container h4 {
-  font-family: 'Fredoka One', cursive;
+  font-family: 'Nunito', sans-serif;
   color: white;
-  font-size: 0.4em;
+  font-size: 0.6em;
   margin: 0;
   margin-left: 1em;
+  font-weight: 900;
 }
 
 .redTeam h3 {

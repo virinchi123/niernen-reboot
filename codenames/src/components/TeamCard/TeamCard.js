@@ -8,7 +8,6 @@ const TeamCard = props => {
     let imageCode = null;
     const bannerClasses = [classes.teamBanner];
     const containerClasses = [classes.container];
-    console.log(props);
 
     if (props.team === 'red') {
         imageCode = <img src={redTeamIcon} alt='unable to load' />;
@@ -18,8 +17,6 @@ const TeamCard = props => {
         containerClasses.push(classes.blueContainer);
         bannerClasses.push(classes.inverted);
     }
-
-    console.log(bannerClasses);
     return (
         <div className={containerClasses.join(' ')}>
             <div className={bannerClasses.join(' ')}>

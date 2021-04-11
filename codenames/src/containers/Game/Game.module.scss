@@ -1,0 +1,50 @@
+.container {
+    display: grid;
+    margin-right: 8vw;
+    margin-left: 8vw;
+    width: 84vw;
+    //grid-template-columns: 1fr 3fr 1fr;
+    grid-template-areas:
+        'topbar topbar topbar'
+        'banner banner banner'
+        'leftTeam cardMat rightTeam'
+        '. cardMat log'
+        '. cardMat log'
+        '. clueInput log';
+
+    grid-column-gap: 20px;
+
+    .topbarContainer {
+        grid-area: topbar;
+    }
+
+    .bannerContainer {
+        grid-area: banner;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 0.7em;
+        box-sizing: border-box;
+    }
+
+    .redTeamCardContainer {
+        grid-area: leftTeam;
+    }
+
+    .blueTeamCardContainer {
+        grid-area: rightTeam;
+    }
+
+    .cardMatContainer {
+        grid-area: cardMat;
+    }
+
+    .gameLogContainer {
+        grid-area: log;
+    }
+
+    .clueInputContainer {
+        grid-area: clueInput;
+        padding: 1em;
+        box-sizing: border-box;
+    }
+}

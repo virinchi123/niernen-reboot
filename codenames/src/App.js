@@ -1,10 +1,10 @@
 import './App.css';
-import Card from './components/Card/Card';
+import Game from './containers/Game/Game';
 
 function App() {
     return (
         <div className='App'>
-            <Card type='red' show={true} word='sampleWord' />
+            <Game />
         </div>
     );
 }

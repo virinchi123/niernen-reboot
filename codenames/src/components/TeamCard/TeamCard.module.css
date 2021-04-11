@@ -14,6 +14,7 @@
   max-width: 17vw;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  margin: 0;
 }
 
 .container .inverted {
@@ -39,8 +40,9 @@
 
 .container .teamBanner h2 {
   color: white;
-  font-family: 'Fredoka One', cursive;
-  font-size: 3vw;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 2vw;
   text-shadow: black 0px 0px 0.5em;
 }
 

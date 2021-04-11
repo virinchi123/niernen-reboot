@@ -1,0 +1,68 @@
+.container {
+  display: -ms-grid;
+  display: grid;
+  margin-right: 8vw;
+  margin-left: 8vw;
+  width: 84vw;
+      grid-template-areas: 'topbar topbar topbar' 'banner banner banner' 'leftTeam cardMat rightTeam' '. cardMat log' '. cardMat log' '. clueInput log';
+  grid-column-gap: 20px;
+}
+
+.container .topbarContainer {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: topbar;
+}
+
+.container .bannerContainer {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: banner;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-bottom: 0.7em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container .redTeamCardContainer {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: leftTeam;
+}
+
+.container .blueTeamCardContainer {
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  grid-area: rightTeam;
+}
+
+.container .cardMatContainer {
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 2;
+  grid-area: cardMat;
+}
+
+.container .gameLogContainer {
+  -ms-grid-row: 4;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 3;
+  grid-area: log;
+}
+
+.container .clueInputContainer {
+  -ms-grid-row: 6;
+  -ms-grid-column: 2;
+  grid-area: clueInput;
+  padding: 1em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+/*# sourceMappingURL=Game.module.css.map */

@@ -8,6 +8,9 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 1%;
+  padding-top: 0.4%;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .topbar .rightTop {
@@ -17,9 +20,9 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   width: 32.7vw;
 }
 

@@ -1,0 +1,14 @@
+.container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: -20;
+}
+
+.container img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+}
+/*# sourceMappingURL=Backdrop.module.css.map */

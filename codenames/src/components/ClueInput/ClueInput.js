@@ -16,7 +16,11 @@ const ClueInput = props => {
         '10',
         '∞',
     ].map(el => {
-        return <option value={el}>{el}</option>;
+        return (
+            <option value={el} key={el}>
+                {el}
+            </option>
+        );
     });
 
     return (
