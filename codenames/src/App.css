@@ -1,3 +1,11 @@
 .App {
     font-family: 'Lato', sans-serif;
 }
+
+.none {
+    display: none;
+}
+
+.clickable :hover {
+    cursor: pointer;
+}

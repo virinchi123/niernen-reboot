@@ -30,7 +30,7 @@ const IntermediateIconButton = props => {
     }
 
     return (
-        <div className={classes.container}>
+        <div className={classes.container} onClick={props.click}>
             {leftTextCode}
             {imageCode}
             {rightTextCode}

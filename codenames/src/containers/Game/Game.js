@@ -155,8 +155,6 @@ const Game = props => {
     //     parentContainerClasses = [classes.showBannerContainer];
     // }
 
-    console.log(parentContainerClasses);
-
     return (
         <Fragment>
             <Backdrop type={backdropType} />

@@ -6,19 +6,26 @@ import reportWebVitals from './reportWebVitals';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import playerReducer from './store/reducers/player';
+import gameReducer from './store/reducers/gameState';
+import roomReducer from './store/reducers/room';
 
-const rootReducer = combineReducers({}); //add reducers inside JSON object.
+const rootReducer = combineReducers({
+    player: playerReducer,
+    game: gameReducer,
+    room: roomReducer,
+}); //add reducers inside JSON object.
 const store = createStore(rootReducer);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
