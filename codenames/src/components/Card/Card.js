@@ -6,18 +6,31 @@ import blueImage from '../../assets/card-blue-back-4.png';
 import blackImage from '../../assets/card-black-back.png';
 
 const Card = props => {
-    let imageSrc = grayImage;
+    let imageSrc;
+
+    imageSrc = grayImage;
     let cardClass = [classes.card];
     let cardCode = null;
-    if (props.type === 'red') {
-        cardClass.push(classes.redRevealedCard);
-        imageSrc = redImage;
-    } else if (props.type === 'blue') {
-        cardClass.push(classes.blueRevealedCard);
-        imageSrc = blueImage;
-    } else if (props.type === 'black') {
-        cardClass.push(classes.blackRevealedCard);
-        imageSrc = blackImage;
+
+    if (props.revealed) {
+        if (props.type === 'red') {
+            cardClass.push(classes.redRevealedCard);
+            imageSrc = redImage;
+        } else if (props.type === 'blue') {
+            cardClass.push(classes.blueRevealedCard);
+            imageSrc = blueImage;
+        } else if (props.type === 'black') {
+            cardClass.push(classes.blackRevealedCard);
+            imageSrc = blackImage;
+        }
+    } else {
+        if (props.trueSight) {
+            if (props.type === 'red') {
+                console.log('reddy');
+                cardClass.push(classes.redCard);
+            } else if (props.type === 'blue') {
+            }
+        }
     }
 
     if (props.hover) {
@@ -29,6 +42,8 @@ const Card = props => {
     //       props.click(event, props.word, props.index);
     //     }
     //   };
+
+    console.log(imageSrc);
 
     let cardWordCode = <p>{props.word}</p>;
 
@@ -48,7 +63,8 @@ const Card = props => {
         </div>
     );
 
-    if (props.show) {
+    console.log(imageSrc);
+    if (props.revealed) {
         cardCode = <img src={imageSrc} alt='src' />;
     }
 

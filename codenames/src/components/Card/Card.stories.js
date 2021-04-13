@@ -18,7 +18,7 @@ redRevealedCard.args = {
     /*👇 The args you need here will depend on your component */
     type: 'red',
     word: 'sampleWord',
-    show: true,
+    revealed: true,
 };
 
 export const blueRevealedCard = Template.bind({});
@@ -26,7 +26,7 @@ export const blueRevealedCard = Template.bind({});
 blueRevealedCard.args = {
     type: 'blue',
     word: 'sampleWord',
-    show: true,
+    revealed: true,
 };
 
 export const blackRevealedCard = Template.bind({});
@@ -34,7 +34,7 @@ export const blackRevealedCard = Template.bind({});
 blackRevealedCard.args = {
     type: 'black',
     word: 'sampleWord',
-    show: true,
+    revealed: true,
 };
 
 export const grayRevealedCard = Template.bind({});
@@ -42,14 +42,33 @@ export const grayRevealedCard = Template.bind({});
 grayRevealedCard.args = {
     type: 'gray',
     word: 'sampleWord',
-    show: true,
+    revealed: true,
 };
 
-export const unrevealedCard = Template.bind({});
+export const neutralUnrevealedCard = Template.bind({});
 
-unrevealedCard.args = {
+neutralUnrevealedCard.args = {
     /*👇 The args you need here will depend on your component */
+    type: 'gray',
+    word: 'sampleWord',
+    revealed: false,
+    trueSight: true,
+};
+
+export const redUnrevealedCard = Template.bind({});
+
+redUnrevealedCard.args = {
     type: 'red',
     word: 'sampleWord',
-    show: false,
+    revealed: false,
+    trueSight: true,
+};
+
+export const blueUnrevealedCard = Template.bind({});
+
+blueUnrevealedCard.args = {
+    type: 'blue',
+    word: 'sampleWord',
+    revealed: false,
+    trueSight: true,
 };

@@ -9,11 +9,17 @@ import { BrowserRouter } from 'react-router-dom';
 import playerReducer from './store/reducers/player';
 import gameReducer from './store/reducers/gameState';
 import roomReducer from './store/reducers/room';
+import cardReducer from './store/reducers/cards';
+import logReducer from './store/reducers/log';
+import clueReducer from './store/reducers/clue';
 
 const rootReducer = combineReducers({
     player: playerReducer,
     game: gameReducer,
     room: roomReducer,
+    cards: cardReducer,
+    log: logReducer,
+    clue: clueReducer,
 }); //add reducers inside JSON object.
 const store = createStore(rootReducer);
 

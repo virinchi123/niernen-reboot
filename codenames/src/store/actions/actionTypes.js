@@ -21,3 +21,12 @@ export const setPlayerTeam = 'SET_PLAYER_TEAM';
 export const setPlayerRole = 'SET_PLAYER_ROLE';
 export const switchPlayerTeam = 'SWITCH_PLAYER_TEAM';
 export const switchPlayerRole = 'SWITCH_PLAYER_ROLE';
+
+export const addLog = 'ADD_LOG';
+
+export const setClue = 'SET_CLUE';
+export const setNumber = 'SET_NUMBER';
+export const decrementNumber = 'DECREMENT_NUMBER';
+
+export const revealCard = 'REVEAL_CARD';
+export const setCards = 'SET_CARDS';

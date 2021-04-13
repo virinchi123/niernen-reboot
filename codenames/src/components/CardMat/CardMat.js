@@ -8,7 +8,7 @@ const CardMat = props => {
             <Card
                 type={card.type}
                 word={card.word}
-                show={card.show}
+                revealed={card.revealed}
                 key={card.word}
             />
         );

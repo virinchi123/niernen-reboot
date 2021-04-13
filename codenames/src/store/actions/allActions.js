@@ -21,3 +21,9 @@ export {
     switchPlayerRole,
     switchPlayerTeam,
 } from './player';
+
+export { addLog } from './log';
+
+export { setNumber, setClue, decrementNumber } from './clue';
+
+export { setCards, revealCard } from './cards';
