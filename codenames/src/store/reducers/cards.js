@@ -12,22 +12,22 @@ const initialState = [
         revealed: false,
     },
     {
-        type: 'red',
+        type: 'blue',
         word: 'word3',
         revealed: false,
     },
     {
-        type: 'red',
+        type: 'blue',
         word: 'word4',
         revealed: false,
     },
     {
-        type: 'red',
+        type: 'blue',
         word: 'word5',
         revealed: false,
     },
     {
-        type: 'red',
+        type: 'blue',
         word: 'word6',
         revealed: false,
     },
@@ -47,22 +47,22 @@ const initialState = [
         revealed: false,
     },
     {
-        type: 'red',
+        type: 'blue',
         word: 'word10',
         revealed: false,
     },
     {
-        type: 'red',
+        type: 'blue',
         word: 'word11',
         revealed: false,
     },
     {
-        type: 'red',
+        type: 'blue',
         word: 'word12',
         revealed: false,
     },
     {
-        type: 'red',
+        type: 'blue',
         word: 'word13',
         revealed: false,
     },
@@ -72,7 +72,7 @@ const initialState = [
         revealed: false,
     },
     {
-        type: 'red',
+        type: 'blue',
         word: 'word15',
         revealed: false,
     },

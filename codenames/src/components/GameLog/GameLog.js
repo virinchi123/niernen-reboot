@@ -6,7 +6,7 @@ const GameLog = props => {
     let logCode = null;
 
     if (props.logs) {
-        logCode = props.logs.map(el => {
+        logCode = props.logs.map((el, index) => {
             if (el.type === 'tap') {
                 return (
                     <LogMessage
@@ -14,6 +14,7 @@ const GameLog = props => {
                         word={el.word}
                         name={el.name}
                         team={el.team}
+                        key={index}
                     />
                 );
             } else if (el.type === 'clue') {
@@ -24,6 +25,25 @@ const GameLog = props => {
                         clue={el.clue}
                         number={el.number}
                         team={el.team}
+                        key={index}
+                    />
+                );
+            } else if (el.type === 'endTurn') {
+                return (
+                    <LogMessage
+                        name={el.name}
+                        type={el.type}
+                        team={el.team}
+                        key={index}
+                    />
+                );
+            } else if (el.type === 'endGuessing') {
+                return (
+                    <LogMessage
+                        name={el.name}
+                        type={el.type}
+                        team={el.team}
+                        key={index}
                     />
                 );
             } else {

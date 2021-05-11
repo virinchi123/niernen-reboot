@@ -27,10 +27,25 @@ const reducer = (state = initialState, action) => {
                     };
                     newState.push(log);
                     return newState;
+                case 'endTurn': {
+                    log = {
+                        type: action.payload.type,
+                        name: action.payload.name,
+                    };
+                    newState.push(log);
+                    return newState;
+                }
+                case 'endGuessing': {
+                    log = {
+                        type: action.payload.type,
+                        name: action.payload.name,
+                    };
+                    newState.push(log);
+                    return newState;
+                }
                 default:
-                    break;
+                    return state;
             }
-            break;
         default:
             return state;
     }

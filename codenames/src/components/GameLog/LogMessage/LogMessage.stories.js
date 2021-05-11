@@ -16,6 +16,10 @@ export const redTeamTap = Template.bind({});
 export const redTeamClue = Template.bind({});
 export const blueTeamTap = Template.bind({});
 export const blueTeamClue = Template.bind({});
+export const redEndTurn = Template.bind({});
+export const blueEndTurn = Template.bind({});
+export const redEndGuessing = Template.bind({});
+export const blueEndGuessing = Template.bind({});
 
 redTeamTap.args = {
     name: 'player',
@@ -45,4 +49,28 @@ blueTeamClue.args = {
     type: 'clue',
     clue: 'sample clue',
     number: 2,
+};
+
+redEndTurn.args = {
+    type: 'endTurn',
+    name: 'player',
+    team: 'red',
+};
+
+blueEndTurn.args = {
+    type: 'endTurn',
+    name: 'player',
+    team: 'blue',
+};
+
+redEndGuessing.args = {
+    type: 'endGuessing',
+    name: 'player',
+    team: 'red',
+};
+
+blueEndGuessing.args = {
+    type: 'endGuessing',
+    name: 'player',
+    team: 'blue',
 };

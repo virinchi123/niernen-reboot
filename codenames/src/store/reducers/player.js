@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    name: '',
+    name: 'Virinchi',
     team: '',
     role: '',
 };
@@ -26,6 +26,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 role: action.payload,
             };
+            console.log('set role');
             return newState;
         case actionTypes.switchPlayerRole:
             switch (state.role) {

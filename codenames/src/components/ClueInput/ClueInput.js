@@ -23,16 +23,31 @@ const ClueInput = props => {
         );
     });
 
+    const setClue = event => {
+        props.setClue(event.target.value);
+    };
+
+    const setNumber = event => {
+        props.setNumber(event.target.value);
+    };
+
     return (
         <div className={classes.container}>
-            <input type='text' placeholder='Type your clue here' />
-            <select>
+            <input
+                type='text'
+                placeholder='Type your clue here'
+                onChange={setClue}
+            />
+            <select onChange={setNumber}>
                 <option value='-' hidden>
                     -
                 </option>
                 {optionCode}
             </select>
-            <IntermediateIconButton leftText='Give Clue' />
+            <IntermediateIconButton
+                leftText='Give Clue'
+                click={props.endTurn}
+            />
         </div>
     );
 };

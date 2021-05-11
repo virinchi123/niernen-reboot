@@ -10,13 +10,17 @@ const Topbar = props => {
             <IntermediateIconButton
                 leftText='Players'
                 image={playerIcon}
-                rightText={props.numberOfPlayers}
+                rightText={'' + props.numberOfPlayers}
             />
             <div className={classes.rightTop}>
-                <IntermediateIconButton leftText='Reset Game' />
+                <IntermediateIconButton
+                    leftText='Reset Game'
+                    click={props.resetFunction}
+                />
                 <IntermediateIconButton
                     leftText={props.username}
                     image={smiley}
+                    click={props.playerFunction}
                 />
             </div>
         </div>

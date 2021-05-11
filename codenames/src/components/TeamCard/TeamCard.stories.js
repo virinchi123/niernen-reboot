@@ -18,6 +18,9 @@ redTeam.args = {
     numberOfCardsLeft: 9,
     operativesList: ['Ready', 'Player', 'One'],
     spymastersList: ['Spy', 'Master'],
+    showJoin: false,
+    setPlayerRole: () => console.log('Set Player Role'),
+    setPlayerTeam: () => console.log('Set Player Team'),
 };
 
 export const blueTeam = Template.bind({});
@@ -26,4 +29,31 @@ blueTeam.args = {
     numberOfCardsLeft: 9,
     operativesList: ['Ready', 'Player', 'One'],
     spymastersList: ['Spy', 'Master'],
+    showJoin: false,
+    setPlayerRole: () => console.log('Set Player Role'),
+    setPlayerTeam: () => console.log('Set Player Team'),
+};
+
+export const unassignedRedTeam = Template.bind({});
+
+unassignedRedTeam.args = {
+    team: 'red',
+    numberOfCardsLeft: 9,
+    operativesList: ['Ready', 'Player', 'One'],
+    spymastersList: ['Spy', 'Master'],
+    showJoin: true,
+    setPlayerRole: () => console.log('Set Player Role'),
+    setPlayerTeam: () => console.log('Set Player Team'),
+};
+
+export const unassignedBlueTeam = Template.bind({});
+
+unassignedBlueTeam.args = {
+    team: 'blue',
+    numberOfCardsLeft: 9,
+    operativesList: ['Ready', 'Player', 'One'],
+    spymastersList: ['Spy', 'Master'],
+    showJoin: true,
+    setPlayerRole: () => console.log('Set Player Role'),
+    setPlayerTeam: () => console.log('Set Player Team'),
 };

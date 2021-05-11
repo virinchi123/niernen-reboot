@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const initialGameState = 0;
+const initialGameState = 1;
 
 const incrementGameState = prevState => {
     if (prevState === 4) {
@@ -17,6 +17,7 @@ const reducer = (state = initialGameState, action) => {
             return incrementGameState(state);
 
         case actionTypes.blueWin:
+            console.log('reduced');
             return 5;
 
         case actionTypes.redWin:

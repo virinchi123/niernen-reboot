@@ -17,6 +17,8 @@ redTeam.args = {
     team: 'red',
     type: 'Operatives/Spymasters',
     names: ['Ready', 'Player', 'One'],
+    setPlayerRole: () => console.log('Set Player Role'),
+    setPlayerTeam: () => console.log('Set Player Team'),
 };
 
 export const blueTeam = Template.bind({});
@@ -24,4 +26,6 @@ blueTeam.args = {
     team: 'blue',
     type: 'Operatives/Spymasters',
     names: ['Ready', 'Player', 'One'],
+    setPlayerRole: () => console.log('Set Player Role'),
+    setPlayerTeam: () => console.log('Set Player Team'),
 };

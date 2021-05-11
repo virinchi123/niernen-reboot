@@ -26,6 +26,10 @@ const logMessage = props => {
             </span>
         );
         text = `gives clue`;
+    } else if (props.type === 'endTurn') {
+        text = ' ended turn';
+    } else if (props.type === 'endGuessing') {
+        text = ' ended guessing';
     }
     return (
         <div className={divClass}>

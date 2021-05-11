@@ -27,11 +27,15 @@ const TeamCard = props => {
                 names={props.operativesList}
                 type='Operatives'
                 team={props.team}
+                showJoin={props.showJoin}
+                joinPlayer={() => props.joinPlayer('operative')}
             />
             <PlayerList
                 names={props.spymastersList}
                 type='Spymasters'
                 team={props.team}
+                showJoin={props.showJoin}
+                joinPlayer={() => props.joinPlayer('spymaster')}
             />
         </div>
     );

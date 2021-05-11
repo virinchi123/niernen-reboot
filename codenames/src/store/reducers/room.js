@@ -6,6 +6,7 @@ const initialState = {
     redSpymasters: [],
     blueSpymasters: [],
     playerCount: 0,
+    tapsLeft: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -108,7 +109,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.removeRedOperative:
             playerCount = state.playerCount - 1;
             redOperatives = state.redOperatives;
-            redOperatives.filter(el => el !== action.payload);
+            redOperatives = redOperatives.filter(el => el !== action.payload);
             newState = {
                 ...state,
                 redOperatives: redOperatives,
@@ -119,7 +120,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.removeBlueOperative:
             playerCount = state.playerCount - 1;
             blueOperatives = state.blueOperatives;
-            blueOperatives.filter(el => el !== action.payload);
+            blueOperatives = blueOperatives.filter(el => el !== action.payload);
             newState = {
                 ...state,
                 blueOperatives: blueOperatives,
@@ -130,7 +131,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.removeRedSpymaster:
             playerCount = state.playerCount - 1;
             redSpymasters = state.redSpymasters;
-            redSpymasters.filter(el => el != action.payload);
+            redSpymasters = redSpymasters.filter(el => el !== action.payload);
             newState = {
                 ...state,
                 redSpymasters: redSpymasters,
@@ -141,13 +142,33 @@ const reducer = (state = initialState, action) => {
         case actionTypes.removeBlueSpymaster:
             playerCount = state.playerCount - 1;
             blueSpymasters = state.blueSpymasters;
-            blueSpymasters.filter(el => el != action.payload);
+            blueSpymasters = blueSpymasters.filter(el => el !== action.payload);
             newState = {
                 ...state,
                 blueSpymasters: blueSpymasters,
                 playerCount: playerCount,
             };
             return newState;
+
+        case actionTypes.setTaps:
+            newState = {
+                ...state,
+                tapsLeft: action.payload,
+            };
+            return newState;
+
+        case actionTypes.decrementTaps:
+            if (state.tapsLeft === 0) {
+                console.log('No taps left to decrement');
+                return state;
+            } else {
+                let newTaps = +state.tapsLeft - 1;
+                newState = {
+                    ...state,
+                    tapsLeft: newTaps,
+                };
+                return newState;
+            }
 
         default:
             return state;

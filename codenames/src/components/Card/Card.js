@@ -26,9 +26,11 @@ const Card = props => {
     } else {
         if (props.trueSight) {
             if (props.type === 'red') {
-                console.log('reddy');
                 cardClass.push(classes.redCard);
             } else if (props.type === 'blue') {
+                cardClass.push(classes.blueCard);
+            } else if (props.type === 'black') {
+                cardClass.push(classes.blackCard);
             }
         }
     }
@@ -43,8 +45,6 @@ const Card = props => {
     //     }
     //   };
 
-    console.log(imageSrc);
-
     let cardWordCode = <p>{props.word}</p>;
 
     if (props.word.length > 8) {
@@ -58,12 +58,11 @@ const Card = props => {
                     ' '
                 ) /* add another argument onClick = {clickHandler} after clickHandler has been*/
             }
+            onClick={props.tap}
         >
             <div className={classes.cardText}>{cardWordCode}</div>
         </div>
     );
-
-    console.log(imageSrc);
     if (props.revealed) {
         cardCode = <img src={imageSrc} alt='src' />;
     }

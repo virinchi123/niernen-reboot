@@ -83,3 +83,23 @@ export const removeRedSpymaster = spymaster => {
         payload: spymaster,
     };
 };
+
+export const setTaps = taps => {
+    return {
+        type: actionTypes.setTaps,
+        payload: taps,
+    };
+};
+
+export const decrementTaps = () => {
+    return {
+        type: actionTypes.decrementTaps,
+    };
+};
+
+export const setZeroTaps = () => {
+    return {
+        type: actionTypes.setTaps,
+        payload: 0,
+    };
+};

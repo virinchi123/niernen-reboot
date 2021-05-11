@@ -13,8 +13,10 @@ export const addBlueOperative = 'ADD_BLUE_OP';
 export const removeBlueOperative = 'REM_BLUE_OP';
 export const addRedSpymaster = 'ADD_RED_SPY';
 export const removeRedSpymaster = 'REM_RED_SPY';
-export const addBlueSpymaster = 'ADD_RED_SPY';
-export const removeBlueSpymaster = 'REM_RED_SPY';
+export const addBlueSpymaster = 'ADD_BLUE_SPY';
+export const removeBlueSpymaster = 'REM_BLUE_SPY';
+export const setTaps = 'SET_TAPS';
+export const decrementTaps = 'DECREMENT_TAPS';
 
 export const setPlayerName = 'SET_PLAYER_NAME';
 export const setPlayerTeam = 'SET_PLAYER_TEAM';

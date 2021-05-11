@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import playerReducer from './store/reducers/player';
@@ -21,7 +21,14 @@ const rootReducer = combineReducers({
     log: logReducer,
     clue: clueReducer,
 }); //add reducers inside JSON object.
-const store = createStore(rootReducer);
+
+const composedEnhancers = compose(
+    window.__REDUX_DEVTOOLS_EXTENSION__
+        ? window.__REDUX_DEVTOOLS_EXTENSION__ &&
+              window.__REDUX_DEVTOOLS_EXTENSION__()
+        : f => f
+);
+const store = createStore(rootReducer, composedEnhancers);
 
 ReactDOM.render(
     <React.StrictMode>

@@ -12,6 +12,9 @@ export {
     removeBlueSpymaster,
     removeRedOperative,
     removeRedSpymaster,
+    setTaps,
+    decrementTaps,
+    setZeroTaps,
 } from './room';
 
 export {

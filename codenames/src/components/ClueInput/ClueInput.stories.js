@@ -14,4 +14,7 @@ const Template = args => <ClueInput {...args} />;
 
 export const Default = Template.bind({});
 
-Default.args = {};
+Default.args = {
+    setClue: () => console.log('clue set'),
+    setNumber: () => console.log('number set'),
+};

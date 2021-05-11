@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import classes from './Game.module.css';
 import Topbar from '../../components/Topbar/Topbar';
 import Banner from '../../components/PromptBanner/PromptBanner';
@@ -7,149 +7,531 @@ import CardMat from '../../components/CardMat/CardMat';
 import GameLog from '../../components/GameLog/GameLog';
 import ClueInput from '../../components/ClueInput/ClueInput';
 import Backdrop from '../../components/Backdrop/Backdrop';
+import * as GameActions from '../../store/actions/allActions';
+import { connect } from 'react-redux';
+
+const backdropColorFunction = turn => {
+    if (turn === 1 || turn === 2 || turn === 5) {
+        return 'blue';
+    } else if (turn === 3 || turn === 4 || turn === 6) {
+        return 'red';
+    }
+};
+
+const shouldShowClueInput = (turn, playerTeam, playerRole) => {
+    if (turn === 1 && playerTeam === 'blue' && playerRole === 'spymaster') {
+        return true;
+    } else if (
+        turn === 3 &&
+        playerTeam === 'red' &&
+        playerRole === 'spymaster'
+    ) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+const shouldShowJoinButtons = (playerTeam, playerRole) => {
+    if (playerTeam || playerRole) {
+        return false;
+    } else {
+        return true;
+    }
+};
+
+const getCardsByType = (cards, type) => {
+    return cards.filter(el => el.type === type && !el.revealed).length;
+};
+
+/*const setPlayerRole = (props, role) => {
+    if (props.playerRole && props.playerTeam) {
+        if (props.playerRole === 'operative') {
+            if (props.playerTeam === 'red') {
+                removeRedOperative(props,props.playerName);
+            } else if (props.playerTeam === 'blue') {
+                removeBlueOperative(props,props.playerName);
+            }
+        } else if (props.playerRole === 'spymaster') {
+            if (props.playerTeam === 'red') {
+                removeRedSpymaster(props,props.playerName);
+            } else if (props.playerTeam === 'blue') {
+                removeBlueSpymaster(props,props.playerName);
+            }
+        }
+    }
+    if (role === 'operative') {
+        if (props.playerTeam === 'red') {
+            addRedOperative(props, props.playerName);
+        } else if (props.playerTeam === 'blue') {
+            addBlueOperative(props, props.playerName);
+        }
+    } else if (role === 'spymaster') {
+        if (props.playerTeam === 'red') {
+            addRedSpymaster(props, props.playerName);
+        } else if (props.playerTeam === 'blue') {
+            addBlueSpymaster(props, props.playerName);
+        }
+    }
+    props.setPlayerRole(role);
+};
+
+const setPlayerTeam = (props, team) => {
+    if (props.playerRole && props.playerTeam) {
+        if (props.playerRole === 'operative') {
+            if (props.playerTeam === 'red') {
+                removeRedOperative(props,props.playerName);
+            } else if (props.playerTeam === 'blue') {
+                removeBlueOperative(props,props.playerName);
+            }
+        } else if (props.playerRole === 'spymaster') {
+            if (props.playerTeam === 'red') {
+                removeRedSpymaster(props,props.playerName);
+            } else if (props.playerTeam === 'blue') {
+                removeBlueSpymaster(props,props.playerName);
+            }
+        }
+    }
+    if (props.playerRole === 'operative') {
+        if (team === 'red') {
+            addRedOperative(props, props.playerName);
+        } else if (team === 'blue') {
+            addBlueOperative(props, props.playerName);
+        }
+    } else if (props.playerRole === 'spymaster') {
+        if (team === 'red') {
+            addRedSpymaster(props, props.playerName);
+        } else if (team === 'blue') {
+            addBlueSpymaster(props, props.playerName);
+        }
+    }
+    props.setPlayerTeam(team);
+};*/
+
+const initPlayerTeamAndRole = (props, team, role) => {
+    if (props.playerTeam || props.playerRole) {
+        console.log('role or team is already set!');
+    } else {
+        props.setPlayerRole(role);
+        props.setPlayerTeam(team);
+        if (role === 'operative') {
+            if (team === 'red') {
+                addRedOperative(props, props.playerName);
+            } else if (team === 'blue') {
+                addBlueOperative(props, props.playerName);
+            }
+        } else if (role === 'spymaster') {
+            if (team === 'red') {
+                addRedSpymaster(props, props.playerName);
+            } else if (team === 'blue') {
+                addBlueSpymaster(props, props.playerName);
+            }
+        }
+    }
+};
+
+const setClue = (props, clue) => {
+    props.setClue(clue);
+};
+
+const setNumber = (props, number) => {
+    props.setNumber(number);
+    props.setTaps(+number + 1);
+};
+
+const endTurn = props => {
+    if (
+        props.turn === 3 &&
+        props.playerTeam === 'red' &&
+        props.playerRole === 'spymaster'
+    ) {
+        props.addLog({
+            type: 'clue',
+            name: props.playerName,
+            clue: props.clue,
+            team: props.playerTeam,
+            number: props.number,
+        });
+        props.addLog({
+            type: 'endTurn',
+            name: props.playerName,
+            team: props.playerTeam,
+        });
+    } else if (
+        props.turn === 1 &&
+        props.playerTeam === 'blue' &&
+        props.playerRole === 'spymaster'
+    ) {
+        props.addLog({
+            type: 'clue',
+            name: props.playerName,
+            clue: props.clue,
+            team: props.playerTeam,
+            number: props.number,
+        });
+        props.addLog({
+            type: 'endTurn',
+            name: props.playerName,
+            team: props.playerTeam,
+        });
+    } else if (
+        props.turn === 2 &&
+        props.playerTeam === 'blue' &&
+        props.playerRole === 'operative'
+    ) {
+        props.addLog({
+            type: 'endGuessing',
+            name: props.playerName,
+            role: props.playerRole,
+        });
+    } else if (
+        props.turn === 4 &&
+        props.playerTeam === 'red' &&
+        props.playerRole === 'operative'
+    ) {
+        props.addLog({
+            type: 'endGuessing',
+            name: props.playerName,
+            role: props.playerRole,
+        });
+    }
+    props.endTurn();
+};
+
+const addRedOperative = (props, name) => {
+    props.addRedOperative(name);
+};
+
+const addBlueOperative = (props, name) => {
+    props.addBlueOperative(name);
+};
+
+const addRedSpymaster = (props, name) => {
+    props.addRedSpymaster(name);
+};
+
+const addBlueSpymaster = (props, name) => {
+    props.addBlueSpymaster(name);
+};
+
+const removeRedOperative = (props, name) => {
+    props.removeRedOperative(name);
+};
+
+const removeBlueOperative = (props, name) => {
+    props.removeBlueOperative(name);
+};
+
+const removeRedSpymaster = (props, name) => {
+    props.removeRedSpymaster(name);
+};
+
+const removeBlueSpymaster = (props, name) => {
+    props.removeBlueSpymaster(name);
+};
+
+const getCardColour = (cards, word) => {
+    for (let card of cards) {
+        if (card.word === word) {
+            return card.type;
+        }
+    }
+    console.log('Card not found!');
+};
+
+//return 0 for not ended, 1 for redWin, and 2 for blueWin
+const gameHasEnded = (
+    cards,
+    turn,
+    word,
+    numberOfBlueCardsLeft,
+    numberOfRedCardsLeft
+) => {
+    if (turn === 2) {
+        console.log('blue turned');
+        const colour = getCardColour(cards, word);
+        console.log(colour);
+        console.log(numberOfBlueCardsLeft);
+        if (colour === 'blue' && numberOfBlueCardsLeft === 1) {
+            //blueWin();
+            return 2;
+        } else if (colour === 'red' && numberOfRedCardsLeft === 1) {
+            //redWin();
+            return 1;
+        } else if (colour === 'black') {
+            //redWin();
+            return 1;
+        } else if (colour === 'gray') {
+            return 0;
+        } else {
+            return 0;
+        }
+    } else if (turn === 4) {
+        const colour = getCardColour(cards, word);
+        if (colour === 'blue' && numberOfBlueCardsLeft === 1) {
+            //blueWin();
+            return 2;
+        } else if (colour === 'red' && numberOfRedCardsLeft === 1) {
+            //redWin();
+            return 1;
+        } else if (colour === 'black') {
+            //blueWin();
+            return 1;
+        } else if (colour === 'gray') {
+            return 0;
+        } else {
+            console.log('invalid colour');
+        }
+    }
+};
+
+const redWin = props => {
+    props.redWin();
+};
+
+const blueWin = props => {
+    console.log('blue Won!');
+    props.blueWin();
+};
+
+const tapCard = (
+    props,
+    word,
+    numberOfBlueCardsLeft,
+    numberOfRedCardsLeft,
+    redWin,
+    blueWin
+) => {
+    let isAppropriateBlueTap =
+        props.turn === 2 &&
+        props.playerTeam === 'blue' &&
+        props.playerRole === 'operative';
+    let isAppropriateRedTap =
+        props.turn === 4 &&
+        props.playerTeam === 'red' &&
+        props.playerRole === 'operative';
+    if (isAppropriateBlueTap || isAppropriateRedTap) {
+        let correct = false;
+        props.revealCard(word);
+        let cards = props.cards.filter(el => el.word === word);
+        if (cards[0].type === props.playerTeam) {
+            correct = true;
+        }
+        props.addLog({
+            type: 'tap',
+            name: props.playerName,
+            word: word,
+            team: props.playerTeam,
+        });
+        props.decrementTaps();
+        if (
+            gameHasEnded(
+                props.cards,
+                props.turn,
+                word,
+                numberOfBlueCardsLeft,
+                numberOfRedCardsLeft
+            )
+        ) {
+            if (
+                gameHasEnded(
+                    props.cards,
+                    props.turn,
+                    word,
+                    numberOfBlueCardsLeft,
+                    numberOfRedCardsLeft
+                ) === 1
+            ) {
+                redWin(props);
+            } else if (
+                gameHasEnded(
+                    props.cards,
+                    props.turn,
+                    word,
+                    numberOfBlueCardsLeft,
+                    numberOfRedCardsLeft
+                ) === 2
+            ) {
+                blueWin(props);
+            } else {
+                console.log('invalid winner');
+            }
+            return;
+        }
+        if (correct) {
+            console.log(props.taps);
+            if (props.taps === 1) {
+                //^might screw me over later idk
+                endTurn(props);
+            }
+        } else {
+            endTurn(props);
+        }
+    } else {
+        console.log('incorrect tap');
+    }
+};
+
+const switchPlayerRole = props => {
+    if (props.playerRole && props.playerTeam) {
+        if (props.playerRole === 'operative') {
+            if (props.playerTeam === 'red') {
+                removeRedOperative(props, props.playerName);
+                addRedSpymaster(props, props.playerName);
+            } else if (props.playerTeam === 'blue') {
+                removeBlueOperative(props, props.playerName);
+                addBlueSpymaster(props, props.playerName);
+            }
+        } else if (props.playerRole === 'spymaster') {
+            if (props.playerTeam === 'red') {
+                removeRedSpymaster(props, props.playerName);
+                addRedOperative(props, props.playerName);
+            } else if (props.playerTeam === 'blue') {
+                removeBlueSpymaster(props, props.playerName);
+                addBlueOperative(props, props.playerName);
+            }
+        }
+    }
+    props.switchPlayerRole();
+};
+
+const switchPlayerTeam = props => {
+    if (props.playerRole && props.playerTeam) {
+        if (props.playerRole === 'operative') {
+            if (props.playerTeam === 'red') {
+                removeRedOperative(props, props.playerName);
+                addBlueOperative(props, props.playerName);
+            } else if (props.playerTeam === 'blue') {
+                removeBlueOperative(props, props.playerName);
+                addRedOperative(props, props.playerName);
+            }
+        } else if (props.playerRole === 'spymaster') {
+            if (props.playerTeam === 'red') {
+                removeRedSpymaster(props, props.playerName);
+                addBlueSpymaster(props, props.playerName);
+            } else if (props.playerTeam === 'blue') {
+                removeBlueSpymaster(props, props.playerName);
+                addRedSpymaster(props, props.playerName);
+            }
+        }
+    }
+    props.switchPlayerTeam();
+};
+
+const resetFunction = props => {
+    switchPlayerRole(props);
+};
+
+const playerFunction = props => {
+    switchPlayerTeam(props);
+};
 
 const Game = props => {
-    let numberOfPlayers = 2;
-    let username = 'Virinchi';
+    let numberOfPlayers = props.playerCount;
+    let username = props.playerName;
     let showBanner = true;
-    let bannerText = 'Wait for your spymasters to give you a clue...';
-    let numberOfRedCardsLeft = 8;
-    let numberOfBlueCardsLeft = 9;
-    let redSpymasters = ['redSpy'];
-    let redOperatives = [];
-    let blueSpymasters = [];
-    let blueOperatives = [];
-    let cards = [
-        {
-            type: 'red',
-            word: 'word1',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word2',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word3',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word4',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word5',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word6',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word7',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word8',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word9',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word10',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word11',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word12',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word13',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word14',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word15',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word16',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word17',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word18',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word19',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word20',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word21',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word22',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word23',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word24',
-            revealed: false,
-        },
-        {
-            type: 'red',
-            word: 'word25',
-            revealed: false,
-        },
-    ];
-    let gameLogs = [];
-    let backdropType = 'red';
+    let cards = props.cards;
+    let numberOfRedCardsLeft = getCardsByType(cards, 'red');
+    let numberOfBlueCardsLeft = getCardsByType(cards, 'blue');
+    let redSpymasters = props.redSpymasters;
+    let redOperatives = props.redOperatives;
+    let blueSpymasters = props.blueSpymasters;
+    let blueOperatives = props.blueOperatives;
+    let gameLogs = props.logs;
+    let backdropType = backdropColorFunction(props.turn);
+    let showJoin = shouldShowJoinButtons(props.playerTeam, props.playerRole);
+
+    const [bannerState, setBannerState] = useState('');
+
+    let bannerCode = null;
+
+    console.log(bannerState);
+    if (bannerState) {
+        bannerCode = <Banner show={showBanner} text={bannerState} />;
+    }
+    console.log(props.turn);
+    useEffect(() => {
+        console.log('effecting');
+        switch (props.turn) {
+            case 1:
+                if (props.playerTeam === 'red') {
+                    setBannerState('Wait for blue spymaster to give clue');
+                } else if (props.playerTeam === 'blue') {
+                    if (props.playerRole === 'operative') {
+                        setBannerState('Wait for yout spymaster to give clue');
+                    } else if (props.playerRole === 'spymaster') {
+                        console.log('spying');
+                        setBannerState('Give your operatives a clue');
+                    }
+                }
+                break;
+            case 2:
+                if (props.playerTeam === 'red') {
+                    setBannerState(
+                        'Wait for other team team to end their turn'
+                    );
+                } else if (props.playerTeam === 'blue') {
+                    if (props.playerRole === 'operative') {
+                        setBannerState('Select cards based on clue');
+                    } else if (props.playerRole === 'spymaster') {
+                        setBannerState('Your operatives are working');
+                    }
+                }
+                break;
+            case 3:
+                if (props.playerTeam === 'red') {
+                    if (props.playerRole === 'operative') {
+                        setBannerState('Wait for your spymaster to give clue');
+                    } else if (props.playerRole === 'spymaster') {
+                        setBannerState('Give your operatives a clue');
+                    }
+                } else if (props.playerTeam === 'blue') {
+                    setBannerState('Wait for red spymaster to give clue');
+                }
+                break;
+            case 4:
+                if (props.playerTeam === 'red') {
+                    if (props.playerRole === 'operative') {
+                        setBannerState('Select cards based on clue');
+                    } else if (props.playerRole === 'spymaster') {
+                        setBannerState('Your operatives are working');
+                    }
+                } else if (props.playerTeam === 'blue') {
+                    setBannerState('Wait for other team to end their turn');
+                }
+                break;
+            case 5:
+                setBannerState('Blue team wins!');
+                break;
+            case 6:
+                setBannerState('Red team wins!');
+                break;
+            default:
+                console.log('invalid turn');
+        }
+    }, [props.turn, props.playerRole, props.playerTeam]);
+
+    console.log(bannerState);
 
     let parentContainerClasses = [classes.container];
+
+    let showClueInput = false;
+
+    if (shouldShowClueInput(props.turn, props.playerTeam, props.playerRole)) {
+        showClueInput = true;
+    }
+
+    let clueInputCode = null;
+
+    if (showClueInput) {
+        clueInputCode = (
+            <ClueInput
+                setClue={clue => setClue(props, clue)}
+                setNumber={number => setNumber(props, number)}
+                endTurn={() => endTurn(props)}
+            />
+        );
+    }
 
     // if (showBanner) {
     //     parentContainerClasses = [classes.showBannerContainer];
@@ -163,21 +545,38 @@ const Game = props => {
                     <Topbar
                         numberOfPlayers={numberOfPlayers}
                         username={username}
+                        resetFunction={() => resetFunction(props)}
+                        playerFunction={() => playerFunction(props)}
                     />
                 </div>
-                <div className={classes.bannerContainer}>
-                    <Banner show={showBanner} text={bannerText} />
-                </div>
+                <div className={classes.bannerContainer}>{bannerCode}</div>
                 <div className={classes.redTeamCardContainer}>
                     <TeamCard
                         team='red'
                         numberOfCardsLeft={numberOfRedCardsLeft}
                         operativesList={redOperatives}
                         spymastersList={redSpymasters}
+                        showJoin={showJoin}
+                        joinPlayer={role =>
+                            initPlayerTeamAndRole(props, 'red', role)
+                        }
                     />
                 </div>
                 <div className={classes.cardMatContainer}>
-                    <CardMat cards={cards} />
+                    <CardMat
+                        cards={cards}
+                        role={props.playerRole}
+                        tap={word =>
+                            tapCard(
+                                props,
+                                word,
+                                numberOfBlueCardsLeft,
+                                numberOfRedCardsLeft,
+                                redWin,
+                                blueWin
+                            )
+                        }
+                    />
                 </div>
                 <div className={classes.blueTeamCardContainer}>
                     <TeamCard
@@ -185,17 +584,70 @@ const Game = props => {
                         numberOfCardsLeft={numberOfBlueCardsLeft}
                         operativesList={blueOperatives}
                         spymastersList={blueSpymasters}
+                        showJoin={showJoin}
+                        joinPlayer={role =>
+                            initPlayerTeamAndRole(props, 'blue', role)
+                        }
                     />
                 </div>
                 <div className={classes.gameLogContainer}>
                     <GameLog logs={gameLogs} />
                 </div>
                 <div className={classes.clueInputContainer}>
-                    <ClueInput />
+                    {clueInputCode}
                 </div>
             </div>
         </Fragment>
     );
 };
 
-export default Game;
+const mapStateToProps = state => {
+    return {
+        turn: state.game,
+        playerRole: state.player.role,
+        playerTeam: state.player.team,
+        playerCount: state.room.playerCount,
+        playerName: state.player.name,
+        cards: state.cards,
+        redOperatives: state.room.redOperatives,
+        redSpymasters: state.room.redSpymasters,
+        blueOperatives: state.room.blueOperatives,
+        blueSpymasters: state.room.blueSpymasters,
+        logs: state.log,
+        clue: state.clue.clue,
+        number: state.clue.number,
+        taps: state.room.tapsLeft,
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setPlayerRole: role => dispatch(GameActions.setPlayerRole(role)),
+        setPlayerTeam: team => dispatch(GameActions.setPlayerTeam(team)),
+        setClue: clue => dispatch(GameActions.setClue(clue)),
+        setNumber: number => dispatch(GameActions.setNumber(number)),
+        setTaps: taps => dispatch(GameActions.setTaps(taps)),
+        endTurn: () => dispatch(GameActions.incrementGameState()),
+        addLog: log => dispatch(GameActions.addLog(log)),
+        decrementTaps: () => dispatch(GameActions.decrementTaps()),
+        revealCard: word => dispatch(GameActions.revealCard(word)),
+        switchPlayerTeam: () => dispatch(GameActions.switchPlayerTeam()),
+        switchPlayerRole: () => dispatch(GameActions.switchPlayerRole()),
+        addRedOperative: name => dispatch(GameActions.addRedOperative(name)),
+        addBlueOperative: name => dispatch(GameActions.addBlueOperative(name)),
+        addRedSpymaster: name => dispatch(GameActions.addRedSpymaster(name)),
+        addBlueSpymaster: name => dispatch(GameActions.addBlueSpymaster(name)),
+        removeRedOperative: name =>
+            dispatch(GameActions.removeRedOperative(name)),
+        removeBlueOperative: name =>
+            dispatch(GameActions.removeBlueOperative(name)),
+        removeRedSpymaster: name =>
+            dispatch(GameActions.removeRedSpymaster(name)),
+        removeBlueSpymaster: name =>
+            dispatch(GameActions.removeBlueSpymaster(name)),
+        redWin: () => dispatch(GameActions.redWin()),
+        blueWin: () => dispatch(GameActions.blueWin()),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

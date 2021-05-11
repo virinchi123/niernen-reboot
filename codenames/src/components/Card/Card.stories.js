@@ -19,6 +19,7 @@ redRevealedCard.args = {
     type: 'red',
     word: 'sampleWord',
     revealed: true,
+    tap: () => console.log('tapped'),
 };
 
 export const blueRevealedCard = Template.bind({});
@@ -27,6 +28,7 @@ blueRevealedCard.args = {
     type: 'blue',
     word: 'sampleWord',
     revealed: true,
+    tap: () => console.log('tapped'),
 };
 
 export const blackRevealedCard = Template.bind({});
@@ -35,6 +37,7 @@ blackRevealedCard.args = {
     type: 'black',
     word: 'sampleWord',
     revealed: true,
+    tap: () => console.log('tapped'),
 };
 
 export const grayRevealedCard = Template.bind({});
@@ -43,6 +46,7 @@ grayRevealedCard.args = {
     type: 'gray',
     word: 'sampleWord',
     revealed: true,
+    tap: () => console.log('tapped'),
 };
 
 export const neutralUnrevealedCard = Template.bind({});
@@ -53,6 +57,7 @@ neutralUnrevealedCard.args = {
     word: 'sampleWord',
     revealed: false,
     trueSight: true,
+    tap: () => console.log('tapped'),
 };
 
 export const redUnrevealedCard = Template.bind({});
@@ -62,6 +67,7 @@ redUnrevealedCard.args = {
     word: 'sampleWord',
     revealed: false,
     trueSight: true,
+    tap: () => console.log('tapped'),
 };
 
 export const blueUnrevealedCard = Template.bind({});
@@ -71,4 +77,5 @@ blueUnrevealedCard.args = {
     word: 'sampleWord',
     revealed: false,
     trueSight: true,
+    tap: () => console.log('tapped'),
 };
