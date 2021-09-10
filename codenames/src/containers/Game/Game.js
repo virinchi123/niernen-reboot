@@ -8,41 +8,27 @@ import GameLog from '../../components/GameLog/GameLog';
 import ClueInput from '../../components/ClueInput/ClueInput';
 import Backdrop from '../../components/Backdrop/Backdrop';
 import * as GameActions from '../../store/actions/allActions';
+import GameFunctions from '../../functions/gameFunctions';
 import { connect } from 'react-redux';
+import { io } from 'socket.io-client';
 
-const backdropColorFunction = turn => {
-    if (turn === 1 || turn === 2 || turn === 5) {
-        return 'blue';
-    } else if (turn === 3 || turn === 4 || turn === 6) {
-        return 'red';
-    }
+console.log(GameFunctions.default);
+
+const options = {
+    secure: true,
+
+    reconnect: true,
+
+    rejectUnauthorized: false,
 };
 
-const shouldShowClueInput = (turn, playerTeam, playerRole) => {
-    if (turn === 1 && playerTeam === 'blue' && playerRole === 'spymaster') {
-        return true;
-    } else if (
-        turn === 3 &&
-        playerTeam === 'red' &&
-        playerRole === 'spymaster'
-    ) {
-        return true;
-    } else {
-        return false;
-    }
-};
+let socket = io.connect('http://localhost:9999', options);
 
-const shouldShowJoinButtons = (playerTeam, playerRole) => {
-    if (playerTeam || playerRole) {
-        return false;
-    } else {
-        return true;
-    }
-};
-
-const getCardsByType = (cards, type) => {
-    return cards.filter(el => el.type === type && !el.revealed).length;
-};
+socket
+    .off('connectedAcknowledgementEvent')
+    .on('connectedAcknowledgementEvent', () => {
+        console.log('connected!');
+    });
 
 /*const setPlayerRole = (props, role) => {
     if (props.playerRole && props.playerTeam) {
@@ -107,6 +93,28 @@ const setPlayerTeam = (props, team) => {
     }
     props.setPlayerTeam(team);
 };*/
+
+const shouldShowClueInput = (turn, playerTeam, playerRole) => {
+    if (turn === 1 && playerTeam === 'blue' && playerRole === 'spymaster') {
+        return true;
+    } else if (
+        turn === 3 &&
+        playerTeam === 'red' &&
+        playerRole === 'spymaster'
+    ) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+const shouldShowJoinButtons = (playerTeam, playerRole) => {
+    if (playerTeam || playerRole) {
+        return false;
+    } else {
+        return true;
+    }
+};
 
 const initPlayerTeamAndRole = (props, team, role) => {
     if (props.playerTeam || props.playerRole) {
@@ -230,61 +238,6 @@ const removeBlueSpymaster = (props, name) => {
     props.removeBlueSpymaster(name);
 };
 
-const getCardColour = (cards, word) => {
-    for (let card of cards) {
-        if (card.word === word) {
-            return card.type;
-        }
-    }
-    console.log('Card not found!');
-};
-
-//return 0 for not ended, 1 for redWin, and 2 for blueWin
-const gameHasEnded = (
-    cards,
-    turn,
-    word,
-    numberOfBlueCardsLeft,
-    numberOfRedCardsLeft
-) => {
-    if (turn === 2) {
-        console.log('blue turned');
-        const colour = getCardColour(cards, word);
-        console.log(colour);
-        console.log(numberOfBlueCardsLeft);
-        if (colour === 'blue' && numberOfBlueCardsLeft === 1) {
-            //blueWin();
-            return 2;
-        } else if (colour === 'red' && numberOfRedCardsLeft === 1) {
-            //redWin();
-            return 1;
-        } else if (colour === 'black') {
-            //redWin();
-            return 1;
-        } else if (colour === 'gray') {
-            return 0;
-        } else {
-            return 0;
-        }
-    } else if (turn === 4) {
-        const colour = getCardColour(cards, word);
-        if (colour === 'blue' && numberOfBlueCardsLeft === 1) {
-            //blueWin();
-            return 2;
-        } else if (colour === 'red' && numberOfRedCardsLeft === 1) {
-            //redWin();
-            return 1;
-        } else if (colour === 'black') {
-            //blueWin();
-            return 1;
-        } else if (colour === 'gray') {
-            return 0;
-        } else {
-            console.log('invalid colour');
-        }
-    }
-};
-
 const redWin = props => {
     props.redWin();
 };
@@ -325,7 +278,7 @@ const tapCard = (
         });
         props.decrementTaps();
         if (
-            gameHasEnded(
+            GameFunctions.gameHasEnded(
                 props.cards,
                 props.turn,
                 word,
@@ -334,7 +287,7 @@ const tapCard = (
             )
         ) {
             if (
-                gameHasEnded(
+                GameFunctions.gameHasEnded(
                     props.cards,
                     props.turn,
                     word,
@@ -344,7 +297,7 @@ const tapCard = (
             ) {
                 redWin(props);
             } else if (
-                gameHasEnded(
+                GameFunctions.gameHasEnded(
                     props.cards,
                     props.turn,
                     word,
@@ -431,14 +384,15 @@ const Game = props => {
     let username = props.playerName;
     let showBanner = true;
     let cards = props.cards;
-    let numberOfRedCardsLeft = getCardsByType(cards, 'red');
-    let numberOfBlueCardsLeft = getCardsByType(cards, 'blue');
+    let numberOfRedCardsLeft = GameFunctions.getCardsByType(cards, 'red');
+    let numberOfBlueCardsLeft = GameFunctions.getCardsByType(cards, 'blue');
     let redSpymasters = props.redSpymasters;
     let redOperatives = props.redOperatives;
     let blueSpymasters = props.blueSpymasters;
     let blueOperatives = props.blueOperatives;
     let gameLogs = props.logs;
-    let backdropType = backdropColorFunction(props.turn);
+    console.log(GameFunctions);
+    let backdropType = GameFunctions.backdropColorFunction(props.turn);
     let showJoin = shouldShowJoinButtons(props.playerTeam, props.playerRole);
 
     const [bannerState, setBannerState] = useState('');

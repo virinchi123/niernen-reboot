@@ -62,7 +62,7 @@ const initialState = [
         revealed: false,
     },
     {
-        type: 'blue',
+        type: 'black',
         word: 'word13',
         revealed: false,
     },
